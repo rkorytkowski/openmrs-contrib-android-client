@@ -165,7 +165,7 @@
         </activity>
         <activity
             android:name=".activities.FormEntryActivity"
-            android:label="@string/action_active_visits"
+            android:label="@string/action_form_entry"
             android:launchMode="singleTop">
         </activity>
         <activity

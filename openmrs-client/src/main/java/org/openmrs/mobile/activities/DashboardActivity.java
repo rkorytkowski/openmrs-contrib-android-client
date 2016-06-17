@@ -114,6 +114,11 @@ public class DashboardActivity extends ACBaseActivity {
         startActivity(intent);
     }
 
+    public void onFormsCallback(View v) {
+        Intent intent = new Intent(this, FormEntryActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onResumeFragments() {
         super.onResumeFragments();

@@ -167,7 +167,7 @@ public class VisitDashboardActivity extends ACBaseActivity implements VisitDashb
 
     private void startCaptureVitals() {
         try {
-            Intent intent = new Intent(this, FormEntryActivity.class);
+            Intent intent = new Intent(this, FormListActivity.class);
             Uri formURI = new FormsDAO(this.getContentResolver()).getFormURI(ApplicationConstants.FormNames.VITALS_XFORM);
             intent.setData(formURI);
             intent.putExtra(ApplicationConstants.BundleKeys.PATIENT_UUID_BUNDLE, mPatient.getUuid());

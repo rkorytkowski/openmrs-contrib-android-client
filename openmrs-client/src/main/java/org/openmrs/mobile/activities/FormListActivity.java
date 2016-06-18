@@ -14,19 +14,25 @@
 
 package org.openmrs.mobile.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import org.openmrs.mobile.R;
 
-public class FormEntryActivity extends ACBaseActivity {
+public class FormListActivity extends ACBaseActivity {
+
+    static final String[] FORMS = new String[] { "Capture Vitals" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setContentView(R.layout.activity_form_entry);
+        this.setContentView(R.layout.activity_form_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -36,7 +42,18 @@ public class FormEntryActivity extends ACBaseActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        RecyclerView formlist = (RecyclerView)findViewById(R.id.formlist);
+        ListView formlist = (ListView) findViewById(R.id.formlist);
+        formlist.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1,FORMS));
+        formlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Intent intent=new Intent(FormListActivity.this, FormCreateActivity.class);
+                intent.putExtra("formname",FORMS[position]);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override

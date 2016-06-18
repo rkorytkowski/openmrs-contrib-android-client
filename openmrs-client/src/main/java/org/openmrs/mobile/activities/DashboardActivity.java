@@ -14,19 +14,14 @@
 
 package org.openmrs.mobile.activities;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import org.openmrs.mobile.R;
 import org.openmrs.mobile.utilities.FontsUtil;
@@ -115,7 +110,7 @@ public class DashboardActivity extends ACBaseActivity {
     }
 
     public void onFormsCallback(View v) {
-        Intent intent = new Intent(this, FormEntryActivity.class);
+        Intent intent = new Intent(this, FormListActivity.class);
         startActivity(intent);
     }
 

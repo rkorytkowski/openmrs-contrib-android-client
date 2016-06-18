@@ -4,7 +4,9 @@ package org.openmrs.mobile.models.retrofit.form;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class QuestionOptions {
+import java.io.Serializable;
+
+public class QuestionOptions implements Serializable {
 
     @SerializedName("rendering")
     @Expose

@@ -17,22 +17,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import org.openmrs.mobile.R;
+import org.openmrs.mobile.activities.fragments.FormPageFragment;
 import org.openmrs.mobile.models.retrofit.form.Form;
+import org.openmrs.mobile.models.retrofit.form.Page;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class FormCreateActivity extends ACBaseActivity implements ViewPager.OnPageChangeListener,View.OnClickListener{
 
@@ -44,6 +46,8 @@ public class FormCreateActivity extends ACBaseActivity implements ViewPager.OnPa
     private LinearLayout pager_indicator;
     private int dotsCount;
     private ImageView[] dots;
+    private Form form;
+    List<Page> pagelist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +81,9 @@ public class FormCreateActivity extends ACBaseActivity implements ViewPager.OnPa
         Toast.makeText(this,formjson,Toast.LENGTH_SHORT).show();
 
         Gson gson = new Gson();
-        Form form=gson.fromJson(formjson,Form.class);
+        form=gson.fromJson(formjson,Form.class);
+        pagelist = form.getPages();
+
 
 
 
@@ -184,7 +190,7 @@ public class FormCreateActivity extends ACBaseActivity implements ViewPager.OnPa
 
         dots[position].setImageDrawable(ContextCompat.getDrawable(this,R.drawable.selecteditem_dot));
 
-        if (position + 1 == dotsCount) {
+        if ((position + 1 == dotsCount)) {
             btnNext.setVisibility(View.GONE);
             btnFinish.setVisibility(View.VISIBLE);
         } else {
@@ -198,30 +204,6 @@ public class FormCreateActivity extends ACBaseActivity implements ViewPager.OnPa
 
     }
 
-    public static class PlaceholderFragment extends Fragment {
-
-        private static final String ARG_PAGE_NUMBER = "page_number";
-
-        public PlaceholderFragment() {
-        }
-
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_PAGE_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.form_page_fragment, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.page_format, getArguments().getInt(ARG_PAGE_NUMBER)));
-            return rootView;
-        }
-    }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -231,28 +213,18 @@ public class FormCreateActivity extends ACBaseActivity implements ViewPager.OnPa
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return FormPageFragment.newInstance(position + 1,pagelist.get(position));
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+
+            return pagelist.size();
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
-            }
-            return null;
+            return pagelist.get(position).getLabel();
         }
     }
 }

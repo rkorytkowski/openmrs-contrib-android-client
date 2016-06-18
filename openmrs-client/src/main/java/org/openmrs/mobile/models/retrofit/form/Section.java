@@ -1,12 +1,13 @@
 
 package org.openmrs.mobile.models.retrofit.form;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Section {
+public class Section implements Serializable {
 
     @SerializedName("label")
     @Expose

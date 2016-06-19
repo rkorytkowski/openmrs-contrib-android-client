@@ -43,7 +43,7 @@
         <RelativeLayout
             android:id="@+id/viewPagerIndicator"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="5dp"
             android:gravity="center">
@@ -53,29 +53,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
+                android:layout_marginBottom="50dp"
                 android:gravity="center"
                 android:orientation="horizontal" />
 
-            <android.support.design.widget.FloatingActionButton
+            <Button
                 android:id="@+id/btn_next"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/primary"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dip"
-                android:layout_marginBottom="5dp"
-                android:src="@drawable/ic_menu_forward" />
+                android:backgroundTint="@color/primary"
+                android:textColor="@color/white"
+                android:text="Next"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                />
 
-            <android.support.design.widget.FloatingActionButton
+            <Button
                 android:id="@+id/btn_finish"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dip"
-                android:layout_marginBottom="5dp"
-                android:background="@color/primary"
-                android:contentDescription="Submit"
-                android:src="@drawable/form_done"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/primary"
+                android:textColor="@color/white"
+                android:text="Submit"
                 android:visibility="gone" />
 
         </RelativeLayout>

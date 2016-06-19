@@ -2,15 +2,23 @@ package org.openmrs.mobile.activities.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.openmrs.mobile.R;
 import org.openmrs.mobile.models.retrofit.form.Page;
+import org.openmrs.mobile.models.retrofit.form.Question;
+import org.openmrs.mobile.models.retrofit.form.Section;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class FormPageFragment extends Fragment {
 
@@ -34,10 +42,71 @@ public class FormPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.form_page_fragment, container, false);
-        TextView tv=(TextView)rootView.findViewById(R.id.test);
-        tv.setText(getPageObject().getSections().get(0).getLabel());
+        LinearLayout parent=(LinearLayout) rootView.findViewById(R.id.viewholder);
+        parent.setGravity(Gravity.CENTER);
+        Page page=getPageObject();
+        List<Section> sectionList=page.getSections();
+        for (Section section:sectionList)
+            addSection(section,parent);
 
         return rootView;
+    }
+
+    void addSection(Section section,LinearLayout parent)
+    {
+        LinearLayout sectionLL=new LinearLayout(getActivity());
+        sectionLL.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(5,5,5,5);
+
+        parent.addView(sectionLL);
+        TextView tv=new TextView(getActivity());
+        tv.setText(section.getLabel());
+        tv.setGravity(Gravity.CENTER_HORIZONTAL);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,22);
+        tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.primary));
+        sectionLL.addView(tv,layoutParams);
+
+        for (Question question:section.getQuestions())
+        {
+            addQuestion(question,sectionLL);
+        }
+
+    }
+
+    void addQuestion(Question question,LinearLayout parent)
+    {
+        if (question.getQuestionOptions().getRendering().equals("group"))
+        {
+            LinearLayout questionLL=new LinearLayout(getActivity());
+            questionLL.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            questionLL.setGravity(Gravity.CENTER);
+            parent.addView(questionLL);
+            layoutParams.setMargins(5,5,5,5);
+            TextView tv=new TextView(getActivity());
+            tv.setText(question.getLabel());
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
+            tv.setTextColor(ContextCompat.getColor(getActivity(),R.color.primary));
+            questionLL.addView(tv,layoutParams);
+            for(Question subquestion:question.getQuestions())
+            {
+                addQuestion(subquestion,questionLL);
+            }
+        }
+
+        if(question.getQuestionOptions().getRendering().equals("number"))
+        {
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(5,5,5,5);
+            EditText ed=new EditText(getActivity());
+            ed.setHint(question.getLabel());
+            ed.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
+            parent.addView(ed,layoutParams);
+        }
     }
 
     Page getPageObject()

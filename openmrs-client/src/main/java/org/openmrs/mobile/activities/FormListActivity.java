@@ -56,8 +56,4 @@ public class FormListActivity extends ACBaseActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
-    }
 }

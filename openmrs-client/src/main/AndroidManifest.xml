@@ -174,6 +174,7 @@
         <activity
             android:name=".activities.FormListActivity"
             android:label="@string/action_form_entry"
+            android:theme="@style/AppTheme"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -206,6 +207,7 @@
 
         <activity
             android:name=".activities.FormCreateActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_form_create"
             android:parentActivityName=".activities.FormListActivity">
             <meta-data

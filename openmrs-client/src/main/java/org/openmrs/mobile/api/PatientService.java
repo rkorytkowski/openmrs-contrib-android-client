@@ -38,11 +38,6 @@ public class PatientService extends IntentService {
         super("Register Patients");
     }
 
-    public SimplePromise<Patient> registerPatient(final Patient patient) {
-        patient.setSynced(false);
-        patientDao.savePatient(patient);
-        return syncPatient(patient);
-    }
 
     public SimplePromise<Patient> syncPatient(final Patient patient) {
         final SimpleDeferredObject<Patient> deferred = new SimpleDeferredObject<>();
@@ -110,7 +105,6 @@ public class PatientService extends IntentService {
             final ListIterator<Patient> it = patientList.listIterator();
             while (it.hasNext()) {
                 final Patient patient=it.next();
-                final Long pid=patient.getId();
                 if(!patient.isSynced()) {
                     syncPatient(patient);
                 }

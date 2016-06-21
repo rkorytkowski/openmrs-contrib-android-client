@@ -167,13 +167,6 @@ public class FormCreateActivity extends ACBaseActivity implements ViewPager.OnPa
         }
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_form_create, menu);
-        return true;
-    }
-
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 

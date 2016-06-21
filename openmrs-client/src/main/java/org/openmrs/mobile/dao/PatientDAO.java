@@ -94,11 +94,16 @@ public class PatientDAO {
     }
 
     public boolean isUserAlreadySaved(String uuid) {
-        String where = String.format("%s = ?", PatientTable.Column.UUID);
+
+        String whereNotNull = String.format("%s = ?", PatientTable.Column.UUID);
+        String whereNull = String.format("%s IS NULL", PatientTable.Column.UUID);
+
         String[] whereArgs = new String[]{uuid};
 
         DBOpenHelper helper = OpenMRSDBOpenHelper.getInstance().getDBOpenHelper();
-        final Cursor cursor = helper.getReadableDatabase().query(PatientTable.TABLE_NAME, null, where, whereArgs, null, null, null);
+        final Cursor cursor = (whereArgs == null) ?
+                helper.getReadableDatabase().query(PatientTable.TABLE_NAME, null, whereNull, null, null, null, null):
+                helper.getReadableDatabase().query(PatientTable.TABLE_NAME, null, whereNotNull, whereArgs, null, null, null);
         String patientUUID = "";
         if (null != cursor) {
             try {

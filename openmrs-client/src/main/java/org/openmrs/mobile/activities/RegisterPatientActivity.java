@@ -261,8 +261,11 @@ public class RegisterPatientActivity extends ACBaseActivity {
 
         final Patient patient = new Patient();
         patient.setPerson(person);
-
-        new PatientService().registerPatient(patient);
+        patient.setUuid(" ");
+//        new PatientService().registerPatient(patient);
+        new PatientDAO().savePatient(patient);
+        Intent i=new Intent(RegisterPatientActivity.this,PatientService.class);
+        startService(i);
 
         RegisterPatientActivity.this.finish();
     }

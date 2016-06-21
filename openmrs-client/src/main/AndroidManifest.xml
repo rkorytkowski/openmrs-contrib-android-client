@@ -81,7 +81,6 @@
             android:launchMode="singleTop"
             android:theme="@style/AppThemeOrig">
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
@@ -99,7 +98,6 @@
             android:launchMode="singleTop"
             android:theme="@style/AppThemeOrig">
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.FindPatientsActivity" />
@@ -125,7 +123,6 @@
             android:name=".activities.PatientDashboardActivity"
             android:theme="@style/AppThemeOrig">
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.FindPatientsActivity" />
@@ -136,7 +133,6 @@
             android:launchMode="singleTop"
             android:theme="@style/AppTheme">
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
@@ -154,7 +150,6 @@
             android:launchMode="singleTop"
             android:theme="@style/AppTheme">
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.FindActiveVisitsActivity" />
@@ -172,7 +167,6 @@
             android:launchMode="singleTop"
             android:theme="@style/AppTheme">
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.FindActiveVisitsActivity" />
@@ -191,7 +185,6 @@
             android:label="@string/action_capture_vitals"
             android:theme="@style/AppTheme">
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
@@ -202,7 +195,6 @@
             android:label="@string/action_register_patient"
             android:theme="@style/AppTheme">
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />

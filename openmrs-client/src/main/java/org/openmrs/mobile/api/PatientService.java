@@ -40,9 +40,7 @@ public class PatientService extends IntentService {
 
     public SimplePromise<Patient> registerPatient(final Patient patient) {
         patient.setSynced(false);
-
         patientDao.savePatient(patient);
-
         return syncPatient(patient);
     }
 

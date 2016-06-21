@@ -112,6 +112,11 @@ public abstract class ACBaseActivity extends AppCompatActivity {
                     Notifier notifier=new Notifier();
                     String text=(isChecked)? mSwitch.getTextOn().toString():mSwitch.getTextOff().toString();
                     notifier.notify(text);
+                    if(isChecked)
+                    {
+                        Intent intent = new Intent("org.openmrs.mobile.intent.action.SYNC_PATIENTS");
+                        getApplicationContext().sendBroadcast(intent);
+                    }
                 }
             });
         }
